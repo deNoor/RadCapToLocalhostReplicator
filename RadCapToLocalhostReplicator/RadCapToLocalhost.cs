@@ -90,9 +90,9 @@ namespace RadCapToLocalhostReplicator
         private void ReportOnStart()
         {
             InfoOutput(string.Empty);
-            InfoOutput($"Radio: {Station}");
-            InfoOutput($"Update song name from: {Path.GetFullPath(CurrentSongFilePath)}");
-            InfoOutput($"Grab media stream from: {HttpListener.Prefixes.SingleOrDefault()}");
+            InfoOutput($"Current radio: {Station}");
+            InfoOutput($"Obs Media Source Input: {HttpListener.Prefixes.SingleOrDefault()}");
+            InfoOutput($"Obs Text read from file: {Path.GetFullPath(CurrentSongFilePath)}");
             InfoOutput(string.Empty);
             InfoOutput("Waiting for connection...");
             InfoOutput(string.Empty);
