@@ -45,15 +45,15 @@ namespace RadCapToLocalhostReplicator
         private string CurrentSongFilePath { get; }
         private Uri Station { get; }
 
-        public async Task RunAsync()
+        public async Task RunAsync(CancellationToken cancellationToken = default)
         {
             CheckDisposed();
             HttpListener.Start();
             ReportOnStart();
-            while (true)
+            while (!cancellationToken.IsCancellationRequested)
             {
                 var context = await HttpListener.GetContextAsync();
-                _ = Task.Run(() => ProcessRequestAsync(context));
+                _ = Task.Run(() => ProcessRequestAsync(context), cancellationToken);
             }
         }
 

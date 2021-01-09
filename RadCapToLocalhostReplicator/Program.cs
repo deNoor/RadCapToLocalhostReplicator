@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RadCapToLocalhostReplicator
@@ -19,7 +20,8 @@ namespace RadCapToLocalhostReplicator
 
                 using var transmitter = new RadCapToLocalhost(options!, Console.WriteLine, null);
                 Console.WriteLine("Press Enter to exit.");
-                await await Task.WhenAny(transmitter.RunAsync(), Console.In.ReadLineAsync());
+                using var cts = new CancellationTokenSource();
+                await await Task.WhenAny(transmitter.RunAsync(cts.Token), Task.Run(Console.In.ReadLineAsync, cts.Token));
             }
             catch (Exception a)
             {
