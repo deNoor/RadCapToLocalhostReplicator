@@ -191,9 +191,9 @@ namespace RadCapToLocalhostReplicator
                                 new ReadOnlySpan<byte>(metadataBuffer, 0, metadataLength));
                             var currentSong = _songTitlePattern.Match(metadata).Groups["Title"].Value;
                             InfoOutput($"{AddCurrentTime()} {currentSong}");
-                            await UpdateSongTitleInFile();
+                            _ = UpdateSongTitleInFile();
 
-                            async ValueTask UpdateSongTitleInFile()
+                            async Task UpdateSongTitleInFile()
                             {
                                 if (currentSong != oldSongName)
                                 {
